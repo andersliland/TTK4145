@@ -17,7 +17,7 @@ void* threadIncNum() {
 void* threadDecNum() {
 	for(int i = 0; i < 1000000; i++) {
 		num--;
-	} 
+	}
 	return NULL;
 }
 

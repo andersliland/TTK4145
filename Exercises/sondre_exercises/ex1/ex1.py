@@ -20,7 +20,6 @@ def threadDecNum():
     for i in range(1000000):
         num -= 1
 
-
 def main():
     thread1 = Thread(target = threadIncNum, args = (),)
     thread1.start()
