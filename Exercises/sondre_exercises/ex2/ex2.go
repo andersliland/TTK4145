@@ -15,10 +15,10 @@ func server(ch1, ch2, finished chan bool) int {
 		select {
 		case <-ch1:
 			num++
-			Println(num)
+			//Println(num)
 		case <-ch2:
 			num--
-			Println(num)
+			//Println(num)
 		case <-finished:
 			exit++
 			if exit == 2 {
@@ -30,14 +30,14 @@ func server(ch1, ch2, finished chan bool) int {
 
 // Are all functions Go routines?
 func threadIncNum(ch1, finished chan bool) {
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 1000000; i++ {
 		ch1 <- true
 	}
 	finished <- true
 }
 
 func threadDecNum(ch2, finished chan bool) {
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 1000000; i++ {
 		ch2 <- true
 	}
 	finished <- true
