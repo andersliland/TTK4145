@@ -16,12 +16,11 @@ func CheckError (err error) {
 }
 
 
-
 func main() {
 
 	fmt.Println("Server running")
 	// Prepare an address at any adress
-	ServerAddr, err := net.ResolveUDPAddr("udp",":20014")
+	ServerAddr, err := net.ResolveUDPAddr("udp",":30000")
 	CheckError(err)
 
 	fmt.Printf("ServerAddr: ", ServerAddr)
@@ -45,5 +44,3 @@ func main() {
 	}
 
 }
-
-
