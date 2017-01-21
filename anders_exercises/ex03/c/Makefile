@@ -1,0 +1,3 @@
+
+run:
+	testing $(ARGS)

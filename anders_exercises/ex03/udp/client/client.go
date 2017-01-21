@@ -1,33 +1,31 @@
 package main
 
-import(
+import (
 	"fmt"
 	"net"
-	"time"
 	"strconv"
+	"time"
 )
 
-
-func CheckError(err error){
+// CheckError
+func CheckError(err error) {
 	if err != nil {
 		fmt.Println("Error: ", err)
 	}
 }
 
-func main(){
+func main() {
 
 	//LocalAddr, err := net.ResolveUDPAddr("udp", "129.241.187.152:")
 
 	//ServerAddr, err := net.ResolveUDPAddr("udp","129.241.187.27:20013")
-	ServerAddr, err := net.ResolveUDPAddr("udp","255.255.255.255:20013")
+	ServerAddr, err := net.ResolveUDPAddr("udp", "255.255.255.255:20013")
 	CheckError(err)
-
 
 	Conn, err := net.DialUDP("udp", nil, ServerAddr)
 	CheckError(err)
 	fmt.Println("DialUDP")
 	defer Conn.Close()
-
 
 	i := 0
 
