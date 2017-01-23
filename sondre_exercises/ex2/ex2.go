@@ -4,7 +4,7 @@
 package main
 
 import (
-	. "fmt"
+	"fmt"
 	"runtime"
 )
 
@@ -55,5 +55,5 @@ func main() {
 	go threadDecNum(ch2, finished)
 	num := server(ch1, ch2, finished)
 
-	Println("Num: ", num)
+	fmt.Println("Num: ", num)
 }

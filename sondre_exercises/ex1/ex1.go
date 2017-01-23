@@ -4,7 +4,7 @@
 package main
 
 import (
-	. "fmt"
+	"fmt"
 	"runtime"
 	"time"
 )
@@ -32,5 +32,5 @@ func main() {
 	// We have no way to wait for the completion of a goroutine (without additional syncronization of some sort)
 	// We'll come back to using channels in Exercise 2. For now: Sleep.
 	time.Sleep(100 * time.Millisecond)
-	Println("Num: ", num)
+	fmt.Println("Num: ", num)
 }
