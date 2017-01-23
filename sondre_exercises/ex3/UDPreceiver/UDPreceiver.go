@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	host    = "10.22.66.249"
-	udpPort = "20014"
+	host = "10.22.66.249"
+	port = "20014"
 )
 
 // CheckError ...
@@ -21,7 +21,7 @@ func CheckError(err error) {
 
 func main() {
 	buffer := make([]byte, 1024)
-	address, _ := net.ResolveUDPAddr("udp", ":"+udpPort)
+	address, _ := net.ResolveUDPAddr("udp", ":"+port)
 	socket, _ := net.ListenUDP("udp", address)
 	for {
 		_, _, err := socket.ReadFromUDP(buffer)
