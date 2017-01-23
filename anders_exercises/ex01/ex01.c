@@ -23,7 +23,7 @@ void* incNumFunc(){
 	for(int j = 0; j < 1000000; j++)
 		Num--;
 	return NULL;
-	
+
 }
 
 
@@ -39,13 +39,13 @@ int main(){
     pthread_create(&incNumThread_id, NULL, incNumFunc, NULL);
 
 
-	// suspends main thread until threads in argument is completed    
+	// suspends main thread until threads in argument is completed
     pthread_join(someThread, NULL);
     pthread_join(decNumThread_id, NULL);
     pthread_join(incNumThread_id, NULL);
 
     printf("Hello from main!\n");
-	printf("Num: %i \n", Num);    
+	printf("Num: %i \n", Num);
     return 0;
-    
+
 }

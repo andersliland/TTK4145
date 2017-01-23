@@ -28,7 +28,7 @@ void* incNumFunc(){
 		pthread_mutex_unlock(&lock);
 	}
 	return NULL;
-	
+
 }
 
 
@@ -46,14 +46,14 @@ int main(){
     pthread_t incNumThread_id;
     pthread_create(&incNumThread_id, NULL, incNumFunc, NULL);
 
-	// suspends main thread until threads in argument is completed    
+	// suspends main thread until threads in argument is completed
     pthread_join(decNumThread_id, NULL);
     pthread_join(incNumThread_id, NULL);
 
     //destroys the mutex
     pthread_mutex_destroy(&lock);
 
-	printf("Num: %i \n", Num);    
+	printf("Num: %i \n", Num);
     return 0;
-    
+
 }
