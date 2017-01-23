@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	host    = "127.0.0.255"
+	host    = "10.22.72.162"
 	udpPort = "20014"
 )
 
@@ -28,8 +28,8 @@ func main() {
 	CheckError(err)
 
 	for {
-		connection.Write([]byte("Hello, Mr. Liland"))
 		time.Sleep(1000 * time.Millisecond)
+		connection.Write([]byte("Hello, Mr. Liland"))
 		fmt.Println("Message sent")
 	}
 }

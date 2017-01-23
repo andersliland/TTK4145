@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	host    = "127.0.0.255"
+	host    = "10.22.72.162"
 	udpPort = "20014"
 )
 
