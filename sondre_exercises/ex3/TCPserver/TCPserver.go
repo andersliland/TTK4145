@@ -27,13 +27,14 @@ func main() {
 	connection, err := socket.Accept()
 	CheckError(err)
 	for {
-		// will listen for message to process ending in newline (\n)
-		message, _ := bufio.NewReader(connection).ReadString('\n')
-		// output message received
-		fmt.Print("Message Received:", string(message))
-		// sample process for string received
+		// Listen for message to process ending in newline (\n)
+		message, err := bufio.NewReader(connection).ReadString('\n')
+		CheckError(err)
+		// Output message received
+		fmt.Print("Message received:", string(message))
+		// Sample process for string received
 		newmessage := strings.ToUpper(message)
-		// send new string back to client
+		// Send new string back to client
 		connection.Write([]byte(newmessage + "\n"))
 	}
 }
