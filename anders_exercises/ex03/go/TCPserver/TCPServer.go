@@ -8,23 +8,34 @@ import (
 
 // const constants
 const (
-	ConnectionHost = "localhost"
-	ConnectionPort = "34933"
-	ConnectionType = "tcp"
+	remoteAddr = "localhost"
+	remotePort = "34933"
+	connType   = "tcp4"
+	localAddr  = ""
+	localPort  = ""
 )
 
+const messageSize = 1 * 1024
+
 // CheckError prints error
-func CheckError(msg string, err error) {
+func CheckError(err error) {
 	if err != nil {
-		fmt.Println("Error: ", msg, err)
+		fmt.Println("Error: ", err)
 		os.Exit(0)
 	}
 }
 
 func main() {
+
+	remoteAddr, err := net.ResolveTCPAddr(connType, remoteAddr+":"+remotePort)
+	CheckError(err)
+
+	localAddr, err := net.ResolveTCPAddr(connType, localAddr+":"+localPort)
+	CheckError(err)
+
 	//Listen for incomming connections
 	listener, err := net.Listen(ConnectionType, ConnectionHost+":"+ConnectionPort)
-	CheckError("Listener", err)
+	CheckError(err)
 
 	// Close the listener when the application closes
 	defer listener.Close()
@@ -34,7 +45,7 @@ func main() {
 	for {
 		// Listen for an incomming connections
 		conn, err := listener.Accept()
-		CheckError("acception:", err)
+		CheckError(err)
 
 		//Handle connection in a new goroutine
 		go handleRequest(conn)
@@ -47,7 +58,7 @@ func handleRequest(conn net.Conn) {
 	buffer := make([]byte, 1024)
 	//Read the incomming connection to buffer
 	_, err := conn.Read(buffer)
-	CheckError("Read", err)
+	CheckError(err)
 
 	//Send a response back to preson contacting us
 	conn.Write([]byte("Message recieved."))
