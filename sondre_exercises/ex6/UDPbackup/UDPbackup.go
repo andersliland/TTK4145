@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"time"
+	"strconv"
 )
 
 const (
 	host = "localhost"
-	port = "20014"
+	port = 9000
 )
 
 func CheckError(err error) {
@@ -19,29 +19,49 @@ func CheckError(err error) {
 	}
 }
 
-func UDPlisten(listenChan chan byte) {
+func UDPlisten(listenChan chan byte, quit chan bool, flag int) {
 	buffer := make([]byte, 1)
-	address, err := net.ResolveUDPAddr("udp", ":"+port)
+	flag = NotEqual(flag)
+	laddr, err := net.ResolveUDPAddr("udp4", ":"+strconv.Itoa(port+flag))
 	CheckError(err)
-	socket, err := net.ListenUDP("udp", address)
+
+	listen, err := net.ListenUDP("udp4", laddr)
 	CheckError(err)
+	defer listen.Close()
 	for {
-		_, _, err := socket.ReadFromUDP(buffer)
-		CheckError(err)
-		listenChan <- buffer[0]
+		select {
+		case <-quit:
+			return
+		default:
+			_, _, err := listen.ReadFromUDP(buffer)
+			CheckError(err)
+			listenChan <- buffer[0]
+		}
+
 	}
 }
 
-func UDPsend(counter byte) {
-	ServerAddress, err := net.ResolveUDPAddr("udp", net.JoinHostPort(host, port))
-	CheckError(err)
-	connection, err := net.DialUDP("udp", nil, ServerAddress)
+func UDPsend(counter byte, flag int) {
+	baddr, err := net.ResolveUDPAddr("udp4", net.JoinHostPort(host, strconv.Itoa(port+flag)))
 	CheckError(err)
 
-	buffer := make([]byte, 1)
-	for {
-		time.Sleep(1000 * time.Millisecond)
-		buffer[0] = counter
-		connection.Write(buffer)
+	conn, err := net.DialUDP("udp4", nil, baddr)
+	CheckError(err)
+	defer conn.Close()
+
+	buf := make([]byte, 1)
+	buf[0] = counter
+
+	_, err = conn.Write(buf)
+	CheckError(err)
+}
+
+func NotEqual(num int) int {
+	if num == 0 {
+		return 1
+	} else if num == 1 {
+		return 2
+	} else {
+		return 0
 	}
 }
