@@ -31,10 +31,10 @@ func main() {
 		message, err := bufio.NewReader(connection).ReadString('\n')
 		CheckError(err)
 		// Output message received
-		fmt.Print("Message received:", string(message))
+		fmt.Print("Message received: ", string(message))
 		// Sample process for string received
-		newmessage := strings.ToUpper(message)
+		returnMessage := strings.ToUpper(message)
 		// Send new string back to client
-		connection.Write([]byte(newmessage + "\n"))
+		connection.Write([]byte(returnMessage + "\n"))
 	}
 }
