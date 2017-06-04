@@ -1,0 +1,13 @@
+#+BEGIN_SRC C
+Phil1 = (phil1StartsUsingFork1 -> phil1StartsUsingFork2 -> phil1StopsUsingFork2 -> phil1StopsUsingFork1 -> Phil1).
+Phil2 = (phil1StartsUsingFork2 -> phil1StartsUsingFork3 -> phil1StopsUsingFork3 -> phil1StopsUsingFork2 -> Phil2).
+Phil3 = (phil1StartsUsingFork3 -> phil1StartsUsingFork1 -> phil1StopsUsingFork1 -> phil1StopsUsingFork3 -> Phil3).
+Fork1 = (phil1StartsUsingFork1 -> phil1StopsUsingFork1 -> Fork1
+       | phil3StartsUsingFork1 -> phil3StopsUsingFork1 -> Fork1).
+Fork2 = (phil2StartsUsingFork2 -> phil2StopsUsingFork2 -> Fork2
+       | phil1StartsUsingFork2 -> phil1StopsUsingFork2 -> Fork2).
+Fork3 = (phil3StartsUsingFork3 -> phil3StopsUsingFork3 -> Fork3
+       | phil2StartsUsingFork3 -> phil2StopsUsingFork3 -> Fork3).
+
+||SYSTEM = (Phil1 || Phil2 || Phil3 || Fork1 || Fork2 || Fork3).
+#+END_SRC C

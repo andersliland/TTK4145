@@ -1,0 +1,30 @@
+
+
+// Categorical Mutual Exclusion
+
+int readers = 0
+mutex = Semaphores(1)
+roomEmpty = Semaphores(1)
+
+
+
+
+
+
+// Writer
+
+roomEmpty.wait()
+    #critical section
+roomEmpty.signal()
+
+
+
+// Reader
+
+roomEmpty.signal()
+mutex.wait()
+    reader += 1
+mutex.wait()
+#critical section
+
+roomEmpty.wait()

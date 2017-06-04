@@ -1,0 +1,8 @@
+T1 = (t1.wa_a -> t1.wa_m -> t1.sig_m -> t1.sig_a -> T1).
+T2 = (t2.wa_b -> t2.wa_m -> t2.sig_m -> t2.sig_b -> T2).
+
+A = (wa_a -> sig_a -> A).
+B = (wa_b -> sig_b -> B).
+M = (wa_m -> sig_m -> M).
+
+||SYSTEM = (T1 || T2 || {t1}::A || {t2}::B || {t1,t2}::M).

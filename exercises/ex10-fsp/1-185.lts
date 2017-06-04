@@ -1,0 +1,9 @@
+T1 = (t1.sa -> DW1),
+	DW1 = (dw1 -> DW1) + {t1.wa}.
+T2 = (t2.wa -> t2.sa -> DW2),
+	DW2 = (dw2 -> DW2).
+T3 = (t3.wa -> t3.sa -> DW3),
+	DW3 = (dw3 -> DW3).
+A = (sa -> wa -> A).
+
+||SYSTEM = (T1 || T2 || T3 || {t1,t2,t3}::A).
